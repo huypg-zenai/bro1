@@ -37,8 +37,8 @@ llm_clients:
       engine: "sglang"
       model: "cont1037/Qwen-3.6-27B-SwiftHeron"
       revision: "02a17ef4359816d7d2a640bd0b01baadcdb3dead"
-      gpu_ids: "0"
-      tensor_parallel_size: 1
+      gpu_ids: "0,1"
+      tensor_parallel_size: 2
       data_parallel_size: 1
       engine_python: "/opt/sglang-env/bin/python"
       gpu_memory_utilization: 0.9
@@ -65,11 +65,11 @@ llm_clients:
     api_key: "local"
     vllm:
       engine: "vllm"
-      model: "zai-org/GLM-4.6V-Flash"
-      revision: "411bb4d77144a3f03accbf4b780f5acb8b7cde4e"
-      gpu_ids: "1,2,3"
+      model: "cont1037/GLM-4.6V-Flash-FP8-DYNAMIC"
+      revision: "e709eeb8761b6e18db5edab00d664e4217193fed"
+      gpu_ids: "2,3"
       tensor_parallel_size: 1
-      data_parallel_size: 3
+      data_parallel_size: 2
       gpu_memory_utilization: 0.9
       max_model_len: 81920
       max_num_seqs: 64
@@ -116,7 +116,7 @@ actors:
     seed: 42
     enable_thinking: false
     multimodal: true
-    ensemble_size: 32
+    ensemble_size: 36
     ensemble_temperature: 0.6
     providers:
       order: []
@@ -126,7 +126,7 @@ actors:
     queue_size: 64
   critic:
     client: "judge-critic-instance"
-    model: "zai-org/GLM-4.6V-Flash"
+    model: "cont1037/GLM-4.6V-Flash-FP8-DYNAMIC"
     workers: 128
     queue_size: 64
     max_tokens: 6144
@@ -145,7 +145,7 @@ actors:
       allow_fallbacks: true
   judge:
     client: "judge-critic-instance"
-    model: "zai-org/GLM-4.6V-Flash"
+    model: "cont1037/GLM-4.6V-Flash-FP8-DYNAMIC"
     workers: 48
     queue_size: 48
     max_tokens: 8192

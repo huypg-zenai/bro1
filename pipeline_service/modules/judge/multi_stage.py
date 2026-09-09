@@ -22,7 +22,7 @@ except ImportError:
     np = None  
 
 
-MODEL = "zai-org/GLM-4.6V-Flash"
+MODEL = "cont1037/GLM-4.6V-Flash-FP8-DYNAMIC"
 
 S1_DRAW_THRESHOLD = 0.7
 S1_BOTH_BAD_AVG = 8.0

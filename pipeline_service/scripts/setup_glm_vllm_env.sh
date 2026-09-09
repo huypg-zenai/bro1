@@ -8,7 +8,7 @@ MANYLINUX="${MANYLINUX:-manylinux_2_28}"
 TORCH_BACKEND="${TORCH_BACKEND:-cu128}"
 TRANSFORMERS_SPEC="${TRANSFORMERS_SPEC:-transformers==5.16.1}"   # pinned: was >=5.0.0rc0
 FASTAPI_SPEC="${FASTAPI_SPEC:-fastapi==0.136.3}"                 # pinned: was <0.137
-MODEL="${MODEL:-zai-org/GLM-4.6V-Flash}"
+MODEL="${MODEL:-cont1037/GLM-4.6V-Flash-FP8-DYNAMIC}"
 MODEL_REVISION="${MODEL_REVISION:-}"
 
 ARCH="$(uname -m)"

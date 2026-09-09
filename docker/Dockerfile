@@ -56,14 +56,16 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     bash /tmp/setup_sglang_env.sh && \
     rm -rf /opt/rustup /tmp/setup_sglang_env.sh /tmp/sglang-env.lock.txt
 
-ARG GLM_MODEL=zai-org/GLM-4.6V-Flash
-ARG GLM_REVISION=411bb4d77144a3f03accbf4b780f5acb8b7cde4e
+ARG GLM_MODEL=cont1037/GLM-4.6V-Flash-FP8-DYNAMIC
+ARG GLM_REVISION=e709eeb8761b6e18db5edab00d664e4217193fed
 COPY pipeline_service/scripts/setup_glm_vllm_env.sh /tmp/setup_glm_vllm_env.sh
 RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=secret,id=hf_token,target=/run/secrets/hf_token \
     SKIP_CUDA_CHECK=1 \
     VENV=/opt/vllm-glm-env \
     MODEL="$GLM_MODEL" \
     MODEL_REVISION="$GLM_REVISION" \
+    HF_TOKEN="$(cat /run/secrets/hf_token 2>/dev/null || true)" \
     bash /tmp/setup_glm_vllm_env.sh && \
     rm -f /tmp/setup_glm_vllm_env.sh
 
